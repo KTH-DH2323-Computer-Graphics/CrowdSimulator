@@ -26,7 +26,7 @@ The `{issue-number}` should be the number of the issue which you can see in GitH
 Code the rotation animation of the cube and commit them. And then code the color animation and to another commit. Your current branch have now two new commits.  
 
 #### **Step 4**
-Now you can create a new Pull-Request of your new branch. The naming convention of a Pull-Request should be: `#{issue-number} {type-of-change}: {title}`. For example `#5 feature: Add new cube animations`. In the description of the PR, write `Fixes: #{issue-number}`. GitHub will then automatically link the PR with the given issue and automatically close it when the PR is merged.
+Now you can create a new Pull-Request of your new branch. The naming convention of a Pull-Request should be: `#{issue-number} {type-of-change}: {title}`. For example `#5 feat: add new cube animations`. In the description of the PR, write `fix: #{issue-number}`. GitHub will then automatically link the PR with the given issue and automatically close it when the PR is merged.
 
 ---
 
