@@ -7,6 +7,7 @@ public class StaticMovement : MonoBehaviour
 {
 
     public Vector3 movementDirection = Vector3.forward;
+    public float speed = -2.0f;
     
     IAvoider avoiderComponent;
 
@@ -19,7 +20,6 @@ public class StaticMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float speed = -3.0f;
         Vector3 avoidanceVector = avoiderComponent.GetPreferredAvoidanceVector(this.gameObject.transform.position, movementDirection);
         transform.Translate((movementDirection * speed + avoidanceVector) * Time.deltaTime, Space.World);
     }
