@@ -1461,9 +1461,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fc1589811330a2459f693d932f6db46, type: 3}
+  m_Script: {fileID: 11500000, guid: 465909fa27d9bed41a30e33873373445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseSensitivity: 500
+  player: {fileID: 256655007}
 --- !u!4 &1058764135 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8541747095160162401, guid: 2734045c9cd8f8441af540a14f403e2c, type: 3}
