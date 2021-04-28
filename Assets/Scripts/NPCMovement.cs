@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using AvoidanceLogic;
 using UnityEngine;
 
-public class StaticMovement : MonoBehaviour
+public class NPCMovement : MonoBehaviour
 {
-
     public Vector3 movementDirection = Vector3.forward;
     public float speed = -2.0f;
     
