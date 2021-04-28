@@ -2048,8 +2048,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31521569b95faae4f8fe55d1297fda52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementDirection: {x: 0, y: 0, z: 1}
-  speed: -2
+  movementDirection: {x: 0, y: 0, z: -1}
+  speed: 2
 --- !u!114 &-1363937612553975667
 MonoBehaviour:
   m_ObjectHideFlags: 0
