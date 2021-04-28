@@ -29,4 +29,5 @@ public class NPCMovement : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(finalDirection);
         transform.Translate(finalDirection * speed * Time.deltaTime, Space.World);
     }
+
 }
