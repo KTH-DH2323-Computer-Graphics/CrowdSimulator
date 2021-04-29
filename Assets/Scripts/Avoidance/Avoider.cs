@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace AvoidanceLogic
@@ -106,6 +107,20 @@ namespace AvoidanceLogic
                 float detectFactor = 1 - (Vector3.Distance(currentPosition, objectToAvoidPosition) / objectToAvoid.detectRadius);
                 float avoidFactor = 1 - (avoidanceVector.magnitude / objectToAvoid.avoidRadius);
                 return Math.Max(detectFactor * avoidFactor * maxAvoidSpeed, 0);
+        }
+
+        public AvoiderChecker GetClosestAvoidanceObject(Vector3 currentPosition) {
+            AvoiderChecker closestObject = null;
+            float closestDistance = 2000.0f;
+            this.objectsToAvoid.ForEach((objectToAvoid) => {
+                float distance = Vector3.Distance(currentPosition, objectToAvoid.transform.position);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestObject = objectToAvoid;
+                }
+            }); 
+
+            return closestObject;
         }
     }
 }
