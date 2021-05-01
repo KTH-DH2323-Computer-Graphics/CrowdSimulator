@@ -15,5 +15,7 @@ namespace AvoidanceLogic
         ///     that this object has.</para>
         /// </summary>
         Vector3 GetPreferredAvoidanceVector(Vector3 currentPosition, Vector3 preferredDirection);
+
+        AvoiderChecker GetClosestAvoidanceObject(Vector3 currentPosition);
     }
 }

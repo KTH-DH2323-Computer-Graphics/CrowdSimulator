@@ -1,11 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace AvoidanceLogic
 {
     public class Avoider : MonoBehaviour, IAvoider
     {
+
+        public float maxAvoidSpeed = 10.0f;
+        public float avoidChangeSpeed = 10.0f;
+
+        private Vector3 currentAvoidVector = Vector3.zero;
+
         private List<AvoiderChecker> objectsToAvoid = new List<AvoiderChecker>();
 
         /**
@@ -47,8 +54,15 @@ namespace AvoidanceLogic
                 sumOfAllAvoidanceDirections += avoidanceDirection;
             });
             Vector3 avarage = sumOfAllAvoidanceDirections / (objectsToAvoid.Count * 1.0f);
-            avarage.y = 0;
-            return avarage;
+
+            return getAndUpdateAvoidVector(avarage);
+        }
+
+        private Vector2 getAndUpdateAvoidVector(Vector3 targetAvoidVector) {
+            Vector3 difference = (targetAvoidVector - currentAvoidVector);
+            float currentDistance = difference.magnitude;
+            currentAvoidVector = Vector3.MoveTowards(currentAvoidVector,targetAvoidVector, avoidChangeSpeed * Time.deltaTime);
+            return currentAvoidVector;
         }
 
         private Vector3 GetPreferredAvoidanceDirectionFromOneObject(
@@ -74,6 +88,9 @@ namespace AvoidanceLogic
             Vector3 x = a + (Vector3.Dot((p - a), d)) * d;
 
             Vector3 avoidanceVector = (x - p);
+
+            ///It is important that we do not want the y-axis
+            avoidanceVector.y = 0;
             return avoidanceVector.normalized * GetAvoidanceVelocity(objectToAvoid, currentPosition, avoidanceVector);
         }
 
@@ -82,10 +99,28 @@ namespace AvoidanceLogic
             Vector3 currentPosition,
             Vector3 avoidanceVector
         ) {
+                currentPosition.y = 0;
+                Vector3 objectToAvoidPosition = objectToAvoid.gameObject.transform.position;
+                objectToAvoidPosition.y = 0;
+
                 float avoiderRadius = objectToAvoid.detectRadius;
-                float detectFactor = Math.Max(objectToAvoid.detectRadius - Vector3.Distance(currentPosition, objectToAvoid.gameObject.transform.position), 0);
-                float avoidFactor = Math.Max(objectToAvoid.avoidRadius - avoidanceVector.magnitude, 0);
-                return detectFactor * avoidFactor;
+                float detectFactor = 1 - (Vector3.Distance(currentPosition, objectToAvoidPosition) / objectToAvoid.detectRadius);
+                float avoidFactor = 1 - (avoidanceVector.magnitude / objectToAvoid.avoidRadius);
+                return Math.Max(detectFactor * avoidFactor * maxAvoidSpeed, 0);
+        }
+
+        public AvoiderChecker GetClosestAvoidanceObject(Vector3 currentPosition) {
+            AvoiderChecker closestObject = null;
+            float closestDistance = 2000.0f;
+            this.objectsToAvoid.ForEach((objectToAvoid) => {
+                float distance = Vector3.Distance(currentPosition, objectToAvoid.transform.position);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestObject = objectToAvoid;
+                }
+            }); 
+
+            return closestObject;
         }
     }
 }
