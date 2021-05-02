@@ -2094,8 +2094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementDirection: {x: 0, y: 0, z: -1}
   speed: 2
-  headAngle: 128.47
-  headRotationSpeed: 0.02
+  headRotationSpeed: 26.12
 --- !u!1 &6053803975967025998
 GameObject:
   m_ObjectHideFlags: 0

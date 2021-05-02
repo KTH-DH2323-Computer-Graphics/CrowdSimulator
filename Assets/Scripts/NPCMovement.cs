@@ -8,8 +8,6 @@ public class NPCMovement : MonoBehaviour
     public Vector3 movementDirection = Vector3.forward;
     public float speed = -2.0f;
 
-    public float headAngle;
-    
     IAvoider avoiderComponent;
 
     private Quaternion initialHeadRotation;
@@ -102,9 +100,9 @@ public class NPCMovement : MonoBehaviour
 
     void UpdateHeadRotationAngle(Vector3 newEulerAngle) {
         headRotationTarget = new Vector3(
-            Mathf.MoveTowardsAngle(headRotationTarget.x, newEulerAngle.x, headRotationSpeed),
-            Mathf.MoveTowardsAngle(headRotationTarget.y, newEulerAngle.y, headRotationSpeed),
-            Mathf.MoveTowardsAngle(headRotationTarget.z, newEulerAngle.z, headRotationSpeed)
+            Mathf.MoveTowardsAngle(headRotationTarget.x, newEulerAngle.x, headRotationSpeed * Time.deltaTime),
+            Mathf.MoveTowardsAngle(headRotationTarget.y, newEulerAngle.y, headRotationSpeed * Time.deltaTime),
+            Mathf.MoveTowardsAngle(headRotationTarget.z, newEulerAngle.z, headRotationSpeed * Time.deltaTime)
         );
     }
 
