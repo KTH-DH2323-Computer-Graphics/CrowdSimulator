@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject npcPrefab;
+    public NPCMovement npcPrefab;
     public float minSpawnTime = 1f;
     public float maxSpawnTime = 2f;
-    public Vector3 verticalSpawnDirection = Vector3.right;
-    public float verticalSpawnRange = 3f;
+    public Vector3 spawnSize = new Vector3(10, 0, 10);
+    public Vector3 npcWalkingDirection = new Vector3(0, 0, 1);
+    public float minSpeed = 1.0f;
+    public float maxSpeed = 1.0f;
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(transform.position, spawnSize);
+    }
+
     void Spawn()
     {   
         // Create new NPC gameObject
-        GameObject npc = Instantiate(npcPrefab, this.gameObject.transform, false);
+        Vector3 spawnPosition = this.gameObject.transform.position + Random.Range(-0.5f, 0.5f) * spawnSize;
+        NPCMovement npc = Instantiate(npcPrefab, spawnPosition, this.gameObject.transform.rotation);
 
-        // Randomize vertical spawn position from spawnpoint
-        Vector3 verticalSpawnPosition = verticalSpawnDirection * Random.Range(-verticalSpawnRange, verticalSpawnRange);
-        Transform newTransform = npc.transform;
-        newTransform.position += verticalSpawnPosition;
+        npc.SetWalkingData(this.maxSpeed, npcWalkingDirection);
                 
         //Randomize new spawntime based on user parameters
         float randomTime = Random.Range(minSpawnTime, maxSpawnTime);

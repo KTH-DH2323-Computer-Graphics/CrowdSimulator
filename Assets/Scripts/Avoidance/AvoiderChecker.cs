@@ -12,6 +12,9 @@ public class AvoiderChecker : MonoBehaviour
     [Tooltip("This is the radius of the preferred distance that every avoider should have to this object")]
     public float avoidRadius = 3.0f;
 
+    [Tooltip("This should be true if this objects moves")]
+    public bool movingObject = false;
+
     [HideInInspector]
     public SphereCollider detectCollider;
     
