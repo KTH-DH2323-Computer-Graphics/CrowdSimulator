@@ -1,7 +1,8 @@
 # DH2323 - Project
 
+## [Live Demo](https://kth-dh2323-computer-graphics.github.io/Project/)
+
 ## Quick Access
-* [Latest Live Version](https://kth-dh2323-computer-graphics.github.io/Project/)
 * [Blog](https://github.com/KTH-DH2323-Computer-Graphics/Project/discussions)
 * [Project Report]()
 
