@@ -6,17 +6,19 @@ public class LookingAround : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
     public Transform player;
-    // Start is called before the first frame update
+
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; //Locks and hides the cursor to the centre of the screen
+        // Locks and hides the cursor to the centre of the screen
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Gets the mouse horizontal movement
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime; 
-        
+
+        // Rotate the player around the y-axis with the mouseX movement
         player.Rotate(Vector3.up * mouseX);
     }
 }
