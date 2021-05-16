@@ -20,14 +20,16 @@ public class Spawner : MonoBehaviour
 
     void Spawn()
     {   
-        // Create new NPC gameObject
+        // Instantiate a new NPCMovement object at a random spawn position based on parameters
         Vector3 spawnPosition = this.gameObject.transform.position + Random.Range(-0.5f, 0.5f) * spawnSize;
         NPCMovement npc = Instantiate(npcPrefab, spawnPosition, this.gameObject.transform.rotation);
 
+        // Set the walking data for the NPC
         npc.SetWalkingData(this.maxSpeed, npcWalkingDirection);
                 
         //Randomize new spawntime based on user parameters
         float randomTime = Random.Range(minSpawnTime, maxSpawnTime);
+        // Invoke a new spawn at a random time
         Invoke("Spawn", randomTime);
     }
     void Start()

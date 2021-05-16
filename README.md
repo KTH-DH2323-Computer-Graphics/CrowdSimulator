@@ -1,6 +1,6 @@
 # DH2323 - Project
 
-## [Live Demo](https://kth-dh2323-computer-graphics.github.io/Project/)
+## [Live Demo](https://kth-dh2323-computer-graphics.github.io/CrowdSimulator/)
 
 ## Quick Access
 * [Blog](https://github.com/KTH-DH2323-Computer-Graphics/Project/discussions)

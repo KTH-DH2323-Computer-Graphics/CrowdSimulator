@@ -13,6 +13,11 @@ namespace AvoidanceLogic
             CleanUpObjectsToAvoid();
         }
 
+        /**
+            <summary>
+                Cleans up all the objects to avoid that has been destoyed in the scene
+            </summary>
+        */
         private void CleanUpObjectsToAvoid() {
             List<int> indexOfObjectsToRemove = new List<int>();
             int index = 0;
@@ -53,8 +58,14 @@ namespace AvoidanceLogic
             objectsToAvoid.Remove(objectToRemove);
         }
 
+        /**
+            <summary>
+                Getting the preferred avoidance vector from all the objects
+            </summary>
+        */
         public Vector3 GetPreferredAvoidanceVector(Vector3 currentPosition, Vector3 preferredDirection)
         {
+            // Check if there is anything to avoid
             if (objectsToAvoid.Count == 0) return Vector3.zero;
 
             Vector3 sumOfAllAvoidanceDirections = Vector3.zero;
@@ -62,7 +73,9 @@ namespace AvoidanceLogic
             foreach (var objectToAvoid in objectsToAvoid)
             {
 
+                // We should ignore objects that is behind
                 if (ObjectIsBehindAvoider(preferredDirection, objectToAvoid, currentPosition)) continue;
+
                 Vector3 avoidanceDirection = GetPreferredAvoidanceDirectionFromOneObject(
                     objectToAvoid,
                     preferredDirection,
@@ -76,6 +89,11 @@ namespace AvoidanceLogic
             return avarageOfAllAvoidanceDirections;
         }
 
+        /**
+            <summary>
+                Get preferred avoidance direction from one object
+            </summary>
+        */
         private Vector3 GetPreferredAvoidanceDirectionFromOneObject(
             AvoiderChecker objectToAvoid,
             Vector3 preferredDirection,
@@ -105,6 +123,11 @@ namespace AvoidanceLogic
             return avoidanceVector.normalized * GetAvoidanceVelocity(objectToAvoid, currentPosition, avoidanceVector);
         }
 
+        /**
+            <summary>
+                Getting the avoindace velocity, also called avoidance weights
+            </summary>
+        */
         private float GetAvoidanceVelocity(
             AvoiderChecker objectToAvoid,
             Vector3 currentPosition,
@@ -120,6 +143,11 @@ namespace AvoidanceLogic
                 return avoidFactor * detectFactor;
         }
 
+        /**
+            <summary>
+                Checking if the object is behind the avoider.
+            </summary>
+        */
         private bool ObjectIsBehindAvoider(Vector3 preferredDirection, AvoiderChecker objectToAvoid, Vector3 currentPosition) {
             Vector3 vectorToObjectToAvoid = GetVectorToObjectToAvoid(objectToAvoid, currentPosition);
             Vector3 projectedVector = Vector3.Project(vectorToObjectToAvoid, preferredDirection);
@@ -128,10 +156,20 @@ namespace AvoidanceLogic
             return isBehind;
         }
 
+        /**
+            <summary>
+                Getting the vector from the current avoider to the object to avoid
+            </summary>
+        */
         private Vector3 GetVectorToObjectToAvoid(AvoiderChecker objectToAvoid, Vector3 currentPosition) {
             return objectToAvoid.transform.position - currentPosition;
         }
 
+        /**
+            <summary>
+                Getting the closest object to avoide
+            </summary>
+        */
         public AvoiderChecker GetClosestMovingAvoidanceObject(Vector3 currentPosition, Vector3 preferredDirection) {
             AvoiderChecker closestObject = null;
             float closestDistance = 2000.0f;
